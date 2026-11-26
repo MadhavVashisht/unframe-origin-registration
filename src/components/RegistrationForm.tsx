@@ -139,7 +139,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
       className="no-print flex h-full flex-col border border-white/15 bg-[#0e0e13]/68 shadow-[0_28px_75px_rgba(0,0,0,0.88),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md"
     >
       {/* Form Header */}
-      <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-white/10 bg-[#14141b]/80 px-5 py-3.5 sm:px-6">
+      <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-white/10 bg-[#14141b]/80 px-4 py-3 sm:px-6 sm:py-3.5">
         <div>
           <p className="font-mono-tabular text-[10px] font-semibold tracking-[0.22em] text-[#a1a1aa] uppercase">
             STEP 01 / ATHLETE ENTRY
@@ -157,7 +157,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
       <form
         onSubmit={handleSubmit}
         noValidate
-        className="flex min-h-0 flex-1 flex-col justify-between gap-3 overflow-y-auto p-5 sm:p-6"
+        className="flex min-h-0 flex-1 flex-col justify-between gap-3 p-4 sm:p-6 lg:overflow-y-auto"
       >
         <div className="space-y-3.5">
           {/* Compact Focusable Validation Summary */}
@@ -292,8 +292,8 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
           </div>
 
           {/* Row 2: AGE, CITY, CONTACT NUMBER */}
-          <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-12">
-            <div className="sm:col-span-3">
+          <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 md:grid-cols-12">
+            <div className="md:col-span-2">
               <label
                 htmlFor={FIELD_INPUT_IDS.age}
                 className="font-mono-tabular block text-[11px] font-semibold tracking-[0.16em] text-[#fafafa] uppercase"
@@ -332,7 +332,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
               )}
             </div>
 
-            <div className="sm:col-span-4">
+            <div className="md:col-span-5 lg:col-span-4">
               <div className="flex items-center justify-between gap-2">
                 <label
                   htmlFor={FIELD_INPUT_IDS.city}
@@ -383,7 +383,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
               )}
             </div>
 
-            <div className="sm:col-span-5">
+            <div className="sm:col-span-2 md:col-span-5 lg:col-span-6">
               <label
                 htmlFor={FIELD_INPUT_IDS.contactNumber}
                 className="font-mono-tabular block text-[11px] font-semibold tracking-[0.16em] text-[#fafafa] uppercase"
@@ -473,7 +473,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
                   updateField('idLast6', normalizeIdLast6Input(e.target.value))
                 }
                 onBlur={() => handleBlur('idLast6')}
-                placeholder="482910 (Aadhaar last 6) or E1234F (PAN last 6)"
+                placeholder="482910 (Aadhaar) or E1234F (PAN)"
                 aria-invalid={Boolean(errors.idLast6)}
                 aria-describedby={
                   errors.idLast6 ? 'reg-id-hint reg-id-error' : 'reg-id-hint'

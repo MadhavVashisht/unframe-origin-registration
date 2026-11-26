@@ -44,7 +44,7 @@ export function EventPoster() {
           transform: 'rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))',
           transformStyle: 'preserve-3d',
         }}
-        className="relative flex h-full flex-col justify-between overflow-x-hidden overflow-y-auto border border-white/15 bg-[#0e0e13]/68 shadow-[0_28px_70px_rgba(0,0,0,0.85)] backdrop-blur-md transition-transform duration-200 ease-out"
+        className="relative flex h-full flex-col justify-between overflow-hidden border border-white/15 bg-[#0e0e13]/68 shadow-[0_28px_70px_rgba(0,0,0,0.85)] backdrop-blur-md transition-transform duration-200 ease-out lg:overflow-y-auto"
       >
         {/* Top hazard accent strip */}
         <div
@@ -53,10 +53,10 @@ export function EventPoster() {
         />
 
         {/* Hero 3D Centerpiece */}
-        <div className="poster-grain relative flex flex-1 flex-col justify-between overflow-hidden border-b border-white/10 p-5 sm:p-6">
+        <div className="poster-grain relative flex flex-1 flex-col justify-between overflow-hidden border-b border-white/10 p-4 sm:p-6">
           {/* Interactive 3D Gyroscope Emblem behind title */}
           <div
-            className="orbit-3d-stage pointer-events-none absolute top-1/2 right-[-28px] h-52 w-52 -translate-y-1/2 opacity-70 sm:right-[-10px] sm:h-60 sm:w-60"
+            className="orbit-3d-stage pointer-events-none absolute top-1/2 right-[-24px] h-40 w-40 -translate-y-1/2 opacity-65 sm:right-[-10px] sm:h-56 sm:w-56"
             aria-hidden="true"
           >
             <div className="orbit-ring-a absolute inset-0 rounded-full border-2 border-[#facc15]/40 shadow-[0_0_24px_rgba(250,204,21,0.15)]" />
@@ -84,7 +84,7 @@ export function EventPoster() {
             <p className="font-mono-tabular text-[11px] font-semibold tracking-[0.28em] text-[#d4d4d8] uppercase">
               PRESENTS
             </p>
-            <h1 className="font-display text-3d-origin mt-1 text-6xl leading-[0.86] tracking-tight text-[#fafafa] uppercase sm:text-7xl">
+            <h1 className="font-display text-3d-origin mt-1 text-5xl leading-[0.86] tracking-tight text-[#fafafa] uppercase sm:text-7xl">
               ORIGIN
             </h1>
             <div className="mt-3 inline-flex items-center bg-[#facc15] px-3 py-1 text-[#08080a] shadow-[0_4px_0_#a16207,0_10px_24px_rgba(250,204,21,0.22)]">
@@ -106,7 +106,7 @@ export function EventPoster() {
         {/* Bottom Specs & 3D Prize Cards */}
         <div className="poster-grain relative flex shrink-0 flex-col gap-3 bg-[#0a0a0e]/70 p-4 sm:p-5">
           {/* Date & City */}
-          <div className="grid grid-cols-2 gap-2.5">
+          <div className="grid grid-cols-1 gap-2.5 min-[400px]:grid-cols-2">
             <div className="border border-white/12 bg-[#131319]/85 px-3.5 py-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
               <div className="flex items-center gap-1.5 text-[#a1a1aa]">
                 <Calendar className="h-3.5 w-3.5 text-[#facc15]" aria-hidden="true" />
@@ -149,7 +149,7 @@ export function EventPoster() {
               </span>
             </div>
 
-            <div className="mt-2.5 grid grid-cols-2 gap-2.5">
+            <div className="mt-2.5 grid grid-cols-1 gap-2.5 min-[400px]:grid-cols-2">
               <div className="border border-[#facc15]/60 bg-gradient-to-br from-[#1d180a]/95 to-[#12100a]/95 px-3 py-2.5 shadow-[0_10px_24px_rgba(250,204,21,0.10),inset_0_1px_0_rgba(250,204,21,0.25)] transition-transform duration-200 hover:-translate-y-0.5">
                 <div className="flex items-center justify-between">
                   <span className="font-mono-tabular text-[10px] font-bold tracking-[0.16em] text-[#fde047] uppercase">
@@ -157,7 +157,7 @@ export function EventPoster() {
                   </span>
                   <Trophy className="h-3.5 w-3.5 text-[#facc15]" aria-hidden="true" />
                 </div>
-                <p className="font-display mt-1 text-3xl tracking-wide text-[#facc15]">
+                <p className="font-display mt-1 text-2xl tracking-wide text-[#facc15] sm:text-3xl">
                   15,000/-
                 </p>
               </div>
@@ -169,7 +169,7 @@ export function EventPoster() {
                   </span>
                   <Award className="h-3.5 w-3.5 text-[#fb923c]" aria-hidden="true" />
                 </div>
-                <p className="font-display mt-1 text-3xl tracking-wide text-[#fafafa]">
+                <p className="font-display mt-1 text-2xl tracking-wide text-[#fafafa] sm:text-3xl">
                   10,000/-
                 </p>
               </div>

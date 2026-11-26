@@ -35,6 +35,14 @@
   }
 }
 
+/* Single-screen lock only when desktop width AND comfortable viewport height are both present */
+@media (min-width: 1024px) and (min-height: 760px) {
+  .desktop-viewport-lock {
+    height: 100dvh;
+    overflow: hidden;
+  }
+}
+
 .font-display {
   font-family: var(--font-display);
   letter-spacing: 0.02em;

@@ -14,9 +14,9 @@ const TICKER_ITEMS = [
 export function BattleMarquee() {
   return (
     <div className="no-print flex h-9 shrink-0 items-stretch border-b border-[#27272f] bg-[#0c0c10]">
-      <div className="flex shrink-0 items-center gap-2.5 border-r border-[#27272f] bg-[#0c0c10] px-3.5 sm:px-5">
+      <div className="flex shrink-0 items-center gap-2 border-r border-[#27272f] bg-[#0c0c10] px-2.5 sm:gap-2.5 sm:px-5">
         <BeatBars />
-        <span className="font-mono-tabular text-[11px] font-bold tracking-[0.2em] text-[#fafafa] uppercase sm:text-xs">
+        <span className="font-mono-tabular text-[10px] font-bold tracking-[0.14em] text-[#fafafa] uppercase sm:text-xs sm:tracking-[0.2em]">
           {EVENT_METADATA.presenter}
         </span>
       </div>

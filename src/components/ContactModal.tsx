@@ -63,7 +63,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="contact-modal-title"
-        className="animate-enter-up w-full max-w-lg border border-white/15 bg-[#0e0e13]/95 shadow-[0_28px_75px_rgba(0,0,0,0.92),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md"
+        className="animate-enter-up max-h-[90dvh] w-full max-w-lg overflow-y-auto border border-white/15 bg-[#0e0e13]/95 shadow-[0_28px_75px_rgba(0,0,0,0.92),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md"
       >
         <div className="hazard-stripe h-1.5 w-full border-b border-white/10" aria-hidden="true" />
 
@@ -98,9 +98,9 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 key={channel.id}
                 className="flex items-center justify-between gap-3 border border-white/10 bg-[#14141b]/85 px-4 py-3"
               >
-                <div className="flex items-center gap-3">
+                <div className="flex min-w-0 flex-1 items-center gap-3">
                   <ChannelIcon id={channel.id} />
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="font-mono-tabular text-[10px] font-semibold tracking-[0.16em] text-[#a1a1aa] uppercase">
                       {channel.label}
                     </p>
@@ -109,12 +109,12 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         href={channel.href}
                         target={channel.href.startsWith('http') ? '_blank' : undefined}
                         rel={channel.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                        className="mt-0.5 inline-block text-sm font-semibold text-[#facc15] underline decoration-[#facc15]/50 underline-offset-2 hover:text-[#fde047] focus-visible:outline-2 focus-visible:outline-[#facc15]"
+                        className="mt-0.5 inline-block break-all text-sm font-semibold text-[#facc15] underline decoration-[#facc15]/50 underline-offset-2 hover:text-[#fde047] focus-visible:outline-2 focus-visible:outline-[#facc15]"
                       >
                         {channel.value}
                       </a>
                     ) : (
-                      <p className="mt-0.5 text-sm font-medium text-[#d4d4d8]">
+                      <p className="mt-0.5 break-words text-sm font-medium text-[#d4d4d8]">
                         {channel.value}
                       </p>
                     )}

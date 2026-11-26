@@ -75,8 +75,8 @@ export function ConfirmationPass({
       </div>
 
       {/* Printable Digital Battle Pass */}
-      <div className="flex flex-1 flex-col justify-between gap-4 p-5 sm:p-6">
-        <div className="print-card relative border-2 border-[#facc15]/70 bg-[#0b0b0f] p-5">
+      <div className="flex min-h-0 flex-1 flex-col justify-between gap-4 p-4 sm:p-6 lg:overflow-y-auto">
+        <div className="print-card relative border-2 border-[#facc15]/70 bg-[#0b0b0f] p-4 sm:p-5">
           <div className="flex flex-wrap items-start justify-between gap-3 border-b border-dashed border-[#3f3f4a] pb-4">
             <div>
               <p className="font-mono-tabular text-[11px] font-semibold tracking-[0.22em] text-[#facc15] uppercase">
@@ -100,21 +100,21 @@ export function ConfirmationPass({
             </div>
           </div>
 
-          <dl className="mt-4 grid grid-cols-2 gap-3.5">
-            <div>
+          <dl className="mt-4 grid grid-cols-1 gap-3.5 min-[460px]:grid-cols-2">
+            <div className="min-w-0">
               <dt className="font-mono-tabular text-[10px] tracking-[0.16em] text-[#a1a1aa] uppercase">
                 LEGAL NAME
               </dt>
-              <dd className="mt-0.5 text-sm font-semibold text-[#fafafa]">
+              <dd className="mt-0.5 break-words text-sm font-semibold text-[#fafafa]">
                 {registration.name}
               </dd>
             </div>
 
-            <div>
+            <div className="min-w-0">
               <dt className="font-mono-tabular text-[10px] tracking-[0.16em] text-[#a1a1aa] uppercase">
                 AGE / CITY
               </dt>
-              <dd className="mt-0.5 text-sm font-semibold text-[#fafafa]">
+              <dd className="mt-0.5 break-words text-sm font-semibold text-[#fafafa]">
                 {registration.age} yrs &bull; {registration.city}
               </dd>
             </div>
