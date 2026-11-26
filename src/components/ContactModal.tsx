@@ -1,24 +1,27 @@
 import { useEffect, useRef } from 'react';
-import { AtSign, Mail, MapPin, MessageCircle, Phone, X } from 'lucide-react';
-import { CONTACT_INFO, type ContactChannel } from '../data/contactInfo';
+import { ArrowUpRight, AtSign, MessageCircle, Phone, X } from 'lucide-react';
+import { CONTACT_INFO, type ContactAction, type ContactChannel } from '../data/contactInfo';
 
 interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-function ChannelIcon({ id }: { id: ContactChannel['id'] }) {
-  switch (id) {
-    case 'phone':
-      return <Phone className="h-4 w-4 text-[#facc15]" aria-hidden="true" />;
+function ChannelIcon({ type }: { type: ContactChannel['type'] }) {
+  if (type === 'instagram') {
+    return <AtSign className="h-4 w-4 shrink-0 text-[#ff5500]" aria-hidden="true" />;
+  }
+  return <Phone className="h-4 w-4 shrink-0 text-[#facc15]" aria-hidden="true" />;
+}
+
+function ActionIcon({ kind }: { kind: ContactAction['kind'] }) {
+  switch (kind) {
+    case 'call':
+      return <Phone className="h-3.5 w-3.5" aria-hidden="true" />;
     case 'whatsapp':
-      return <MessageCircle className="h-4 w-4 text-[#facc15]" aria-hidden="true" />;
-    case 'email':
-      return <Mail className="h-4 w-4 text-[#facc15]" aria-hidden="true" />;
+      return <MessageCircle className="h-3.5 w-3.5" aria-hidden="true" />;
     case 'instagram':
-      return <AtSign className="h-4 w-4 text-[#ff5500]" aria-hidden="true" />;
-    case 'venue':
-      return <MapPin className="h-4 w-4 text-[#ff5500]" aria-hidden="true" />;
+      return <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />;
   }
 }
 
@@ -123,43 +126,50 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
             </button>
           </div>
 
-          <div className="mt-4 space-y-2.5">
+          <div className="mt-4 space-y-3">
             {CONTACT_INFO.channels.map((channel) => (
               <div
                 key={channel.id}
-                className="flex items-center justify-between gap-3 border border-white/10 bg-[#14141b]/85 px-4 py-3"
+                className="flex flex-col gap-3 border border-white/10 bg-[#14141b]/85 px-4 py-3.5 sm:flex-row sm:items-center sm:justify-between"
               >
-                <div className="flex min-w-0 flex-1 items-center gap-3">
-                  <ChannelIcon id={channel.id} />
-                  <div className="min-w-0 flex-1">
+                <div className="flex min-w-0 items-center gap-3">
+                  <ChannelIcon type={channel.type} />
+                  <div className="min-w-0">
                     <p className="font-mono-tabular text-[10px] font-semibold tracking-[0.16em] text-[#a1a1aa] uppercase">
                       {channel.label}
                     </p>
-                    {channel.href ? (
-                      <a
-                        href={channel.href}
-                        target={channel.href.startsWith('http') ? '_blank' : undefined}
-                        rel={channel.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                        className="mt-0.5 inline-block break-all text-sm font-semibold text-[#facc15] underline decoration-[#facc15]/50 underline-offset-2 hover:text-[#fde047] focus-visible:outline-2 focus-visible:outline-[#facc15]"
-                      >
-                        {channel.value}
-                      </a>
-                    ) : (
-                      <p className="mt-0.5 break-words text-sm font-medium text-[#d4d4d8]">
-                        {channel.value}
-                      </p>
-                    )}
+                    <p className="font-mono-tabular mt-0.5 break-all text-sm font-semibold text-[#fafafa]">
+                      {channel.value}
+                    </p>
                   </div>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2">
+                  {channel.actions.map((action) => {
+                    const isExternal = action.href.startsWith('http');
+                    return (
+                      <a
+                        key={action.label}
+                        href={action.href}
+                        target={isExternal ? '_blank' : undefined}
+                        rel={isExternal ? 'noopener noreferrer' : undefined}
+                        className={`font-mono-tabular inline-flex min-h-[44px] flex-1 cursor-pointer items-center justify-center gap-1.5 border px-3 py-1.5 text-[11px] font-bold tracking-wider uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#facc15] sm:min-h-[36px] sm:flex-none ${
+                          action.kind === 'whatsapp'
+                            ? 'border-[#4ade80]/50 bg-[#0c2415] text-[#86efac] hover:border-[#4ade80] hover:text-[#bbf7d0]'
+                            : action.kind === 'instagram'
+                              ? 'border-[#ff5500]/50 bg-[#261108] text-[#fdba74] hover:border-[#ff5500] hover:text-[#fed7aa]'
+                              : 'border-[#facc15]/50 bg-[#1d180a] text-[#fde047] hover:border-[#facc15] hover:text-[#fef08a]'
+                        }`}
+                      >
+                        <ActionIcon kind={action.kind} />
+                        <span>{action.label}</span>
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
             ))}
           </div>
-
-          {CONTACT_INFO.note && (
-            <p className="mt-4 border-t border-white/10 pt-3 text-xs text-[#a1a1aa]">
-              {CONTACT_INFO.note}
-            </p>
-          )}
         </div>
       </div>
     </div>
