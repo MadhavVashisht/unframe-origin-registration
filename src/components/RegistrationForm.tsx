@@ -136,7 +136,7 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
   return (
     <section
       aria-labelledby="form-heading"
-      className="no-print flex h-full flex-col border border-white/15 bg-[#0e0e13]/74 shadow-[0_28px_75px_rgba(0,0,0,0.88),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md"
+      className="no-print flex h-full flex-col border border-white/15 bg-[#0e0e13]/68 shadow-[0_28px_75px_rgba(0,0,0,0.88),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md"
     >
       {/* Form Header */}
       <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-white/10 bg-[#14141b]/80 px-5 py-3.5 sm:px-6">

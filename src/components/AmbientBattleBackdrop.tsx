@@ -41,7 +41,7 @@ function PhotoWallRow({
   direction: 'left' | 'right';
 }) {
   return (
-    <div className="relative h-full w-full overflow-hidden">
+    <div className="relative h-[32vh] min-h-[180px] w-full overflow-hidden">
       <div
         className={`flex h-full w-max gap-3 sm:gap-4 ${
           direction === 'left' ? 'animate-wall-left' : 'animate-wall-right'
@@ -52,15 +52,15 @@ function PhotoWallRow({
             {items.map((item, idx) => (
               <div
                 key={`${dup}-${idx}`}
-                className="relative h-full w-60 shrink-0 overflow-hidden border border-white/15 bg-[#0a0a0e] shadow-[0_12px_30px_rgba(0,0,0,0.65)] sm:w-80 lg:w-96"
+                className="relative h-full w-64 shrink-0 overflow-hidden border border-white/15 bg-[#0a0a0e] shadow-[0_12px_30px_rgba(0,0,0,0.65)] sm:w-80 lg:w-96"
               >
                 <img
                   src={item.src}
                   alt=""
-                  className={`h-full w-full object-cover ${item.pos} contrast-115 saturate-95 opacity-[0.68]`}
+                  className={`h-full w-full scale-105 object-cover ${item.pos} contrast-115 saturate-95 opacity-80`}
                 />
                 <div
-                  className="absolute inset-0 bg-gradient-to-tr from-[#08080a]/50 via-transparent to-[#facc15]/10"
+                  className="absolute inset-0 bg-gradient-to-tr from-[#08080a]/35 via-transparent to-[#facc15]/10"
                   aria-hidden="true"
                 />
               </div>
@@ -112,15 +112,15 @@ function WireframeCube({
 export function AmbientBattleBackdrop() {
   return (
     <div
-      className="no-print pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-[#060608]"
+      className="no-print pointer-events-none fixed inset-0 z-0 overflow-hidden bg-[#060608]"
       aria-hidden="true"
     >
-      {/* 3D Tilted Scrolling Multi-Photo Dance Battle Wall */}
+      {/* 3D Tilted Scrolling Multi-Photo Dance Battle Wall (non-negative Z for Safari) */}
       <div
-        className="absolute inset-[-10%] grid grid-rows-3 gap-3 transition-transform duration-300 ease-out sm:gap-4"
+        className="absolute inset-x-[-8%] inset-y-[-4%] z-[1] flex flex-col justify-center gap-3 transition-transform duration-300 ease-out sm:gap-4"
         style={{
           transform:
-            'perspective(1100px) rotateX(8deg) rotateY(calc(var(--mx, 0) * -6deg)) translate3d(calc(var(--mx, 0) * -14px), calc(var(--my, 0) * -10px), -40px) scale(1.1)',
+            'perspective(1100px) rotateX(6deg) rotateY(calc(var(--mx, 0) * -5deg)) translate3d(calc(var(--mx, 0) * -12px), calc(var(--my, 0) * -8px), 0px) scale(1.06)',
         }}
       >
         <PhotoWallRow items={ROW_ONE} direction="left" />
@@ -128,23 +128,23 @@ export function AmbientBattleBackdrop() {
         <PhotoWallRow items={ROW_THREE} direction="left" />
       </div>
 
-      {/* Balanced Spotlight & Vignette Scrim — keeps background dancers visible */}
+      {/* Balanced Spotlight & Vignette Scrim — keeps background dancers clearly visible */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 z-[2]"
         style={{
           background:
-            'radial-gradient(circle at 20% 18%, rgba(250, 204, 21, 0.16) 0%, transparent 45%), radial-gradient(circle at 82% 24%, rgba(255, 85, 0, 0.16) 0%, transparent 42%), radial-gradient(circle at 50% 50%, rgba(6, 6, 8, 0.36) 0%, rgba(6, 6, 8, 0.72) 92%)',
+            'radial-gradient(circle at 20% 18%, rgba(250, 204, 21, 0.16) 0%, transparent 45%), radial-gradient(circle at 82% 24%, rgba(255, 85, 0, 0.16) 0%, transparent 42%), radial-gradient(circle at 50% 50%, rgba(6, 6, 8, 0.24) 0%, rgba(6, 6, 8, 0.62) 95%)',
         }}
       />
 
       {/* 3D Perspective Dance Floor Grid */}
-      <div className="absolute inset-x-[-15%] bottom-[-12%] h-[56vh] opacity-65">
+      <div className="absolute inset-x-[-15%] bottom-[-12%] z-[3] h-[54vh] opacity-65">
         <div className="stage-floor-3d h-full w-full" />
       </div>
 
       {/* Floating 3D Geometric Stage Elements */}
       <div
-        className="absolute top-[11%] left-[3%] hidden opacity-70 transition-transform duration-300 ease-out lg:block"
+        className="absolute top-[11%] left-[3%] z-[4] hidden opacity-75 transition-transform duration-300 ease-out lg:block"
         style={{
           transform:
             'translate3d(calc(var(--mx, 0) * 18px), calc(var(--my, 0) * 14px), 0)',
@@ -153,13 +153,13 @@ export function AmbientBattleBackdrop() {
         <div className="animate-float-3d">
           <WireframeCube
             size={68}
-            borderClass="border-[#facc15]/55 bg-[#facc15]/[0.04] shadow-[0_0_18px_rgba(250,204,21,0.16)]"
+            borderClass="border-[#facc15]/60 bg-[#facc15]/[0.05] shadow-[0_0_18px_rgba(250,204,21,0.18)]"
           />
         </div>
       </div>
 
       <div
-        className="absolute right-[4%] bottom-[9%] hidden opacity-65 transition-transform duration-300 ease-out lg:block"
+        className="absolute right-[4%] bottom-[10%] z-[4] hidden opacity-70 transition-transform duration-300 ease-out lg:block"
         style={{
           transform:
             'translate3d(calc(var(--mx, 0) * -20px), calc(var(--my, 0) * -14px), 0)',
@@ -169,18 +169,18 @@ export function AmbientBattleBackdrop() {
           <WireframeCube
             size={84}
             reverse
-            borderClass="border-[#ff5500]/55 bg-[#ff5500]/[0.04] shadow-[0_0_22px_rgba(255,85,0,0.16)]"
+            borderClass="border-[#ff5500]/60 bg-[#ff5500]/[0.05] shadow-[0_0_22px_rgba(255,85,0,0.18)]"
           />
         </div>
       </div>
 
       {/* Background 3D Gyroscope Rings */}
       <div
-        className="orbit-3d-stage absolute top-[54%] left-[48%] hidden -translate-x-1/2 -translate-y-1/2 opacity-30 lg:block"
+        className="orbit-3d-stage absolute top-[52%] left-[48%] z-[3] hidden -translate-x-1/2 -translate-y-1/2 opacity-35 lg:block"
         style={{ width: 420, height: 420 }}
       >
-        <div className="orbit-ring-a absolute inset-0 rounded-full border border-[#facc15]/40" />
-        <div className="orbit-ring-b absolute inset-8 rounded-full border border-dashed border-[#ff5500]/45" />
+        <div className="orbit-ring-a absolute inset-0 rounded-full border border-[#facc15]/45" />
+        <div className="orbit-ring-b absolute inset-8 rounded-full border border-dashed border-[#ff5500]/50" />
       </div>
     </div>
   );
