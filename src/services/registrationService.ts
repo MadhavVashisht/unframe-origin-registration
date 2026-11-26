@@ -171,6 +171,12 @@ export async function submitRegistration(
       );
     }
 
+    if (isAppsScript && parsed?.status !== 'success') {
+      throw new Error(
+        'Google Sheets Web App returned a non-JSON or login page. Set Apps Script Web App access to "Anyone" and redeploy.'
+      );
+    }
+
     return {
       mode: endpoint.mode,
       registration: payload,

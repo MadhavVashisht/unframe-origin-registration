@@ -121,3 +121,26 @@ test('submitRegistration surfaces Google Sheets error messages cleanly', async (
     globalThis.fetch = originalFetch;
   }
 });
+
+test('submitRegistration rejects Google login HTML pages instead of falsely succeeding', async () => {
+  const originalFetch = globalThis.fetch;
+
+  globalThis.fetch = (async () =>
+    new Response('<!doctype html><html><head><base href="https://accounts.google.com/"></head></html>', {
+      status: 200,
+      headers: { 'Content-Type': 'text/html' },
+    })) as typeof fetch;
+
+  try {
+    await assert.rejects(
+      () =>
+        submitRegistration(SAMPLE_VALUES, {
+          url: 'https://script.google.com/macros/s/test/exec',
+          mode: 'google-sheets',
+        }),
+      /Anyone/i
+    );
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});

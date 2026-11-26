@@ -86,11 +86,13 @@ export async function POST(request: Request): Promise<Response> {
       // Upstream returned non-JSON
     }
 
-    if (!upstream.ok || parsed?.status === 'error') {
+    if (!upstream.ok || parsed?.status !== 'success') {
       return jsonResponse(
         {
           status: 'error',
-          error: parsed?.error || `Google Sheets upstream error (${upstream.status}).`,
+          error:
+            parsed?.error ||
+            `Google Sheets upstream did not confirm success (HTTP ${upstream.status}). Check Web App access is set to "Anyone".`,
         },
         502
       );
