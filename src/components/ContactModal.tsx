@@ -33,6 +33,27 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     previousFocusRef.current = document.activeElement as HTMLElement | null;
     closeBtnRef.current?.focus();
 
+    // Lock background scroll across desktop and iOS Safari smartphones
+    const scrollY = window.scrollY;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+    const prevHtmlScrollBehavior = document.documentElement.style.scrollBehavior;
+    const prevBodyStyle = {
+      position: document.body.style.position,
+      top: document.body.style.top,
+      left: document.body.style.left,
+      right: document.body.style.right,
+      width: document.body.style.width,
+      overflow: document.body.style.overflow,
+    };
+
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+    document.body.style.overflow = 'hidden';
+
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === 'Escape') {
         onClose();
@@ -41,6 +62,16 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
+      document.documentElement.style.overflow = prevHtmlOverflow;
+      document.body.style.position = prevBodyStyle.position;
+      document.body.style.top = prevBodyStyle.top;
+      document.body.style.left = prevBodyStyle.left;
+      document.body.style.right = prevBodyStyle.right;
+      document.body.style.width = prevBodyStyle.width;
+      document.body.style.overflow = prevBodyStyle.overflow;
+      document.documentElement.style.scrollBehavior = 'auto';
+      window.scrollTo(0, scrollY);
+      document.documentElement.style.scrollBehavior = prevHtmlScrollBehavior;
       previousFocusRef.current?.focus();
     };
   }, [isOpen, onClose]);
@@ -51,7 +82,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
   return (
     <div
-      className="no-print fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-xs"
+      className="no-print fixed inset-0 z-50 flex items-center justify-center overflow-hidden overscroll-contain bg-black/75 p-4 backdrop-blur-xs"
       role="presentation"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
@@ -63,7 +94,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="contact-modal-title"
-        className="animate-enter-up max-h-[90dvh] w-full max-w-lg overflow-y-auto border border-white/15 bg-[#0e0e13]/95 shadow-[0_28px_75px_rgba(0,0,0,0.92),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md"
+        className="animate-enter-up max-h-[90dvh] w-full max-w-lg touch-pan-y overflow-y-auto overscroll-contain border border-white/15 bg-[#0e0e13]/95 shadow-[0_28px_75px_rgba(0,0,0,0.92),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md"
       >
         <div className="hazard-stripe h-1.5 w-full border-b border-white/10" aria-hidden="true" />
 

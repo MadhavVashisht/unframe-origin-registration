@@ -222,10 +222,6 @@
   animation: marquee-scroll 26s linear infinite;
 }
 
-.animate-marquee:hover {
-  animation-play-state: paused;
-}
-
 @keyframes wall-drift-left {
   0% {
     transform: translate3d(0%, 0, 0);
