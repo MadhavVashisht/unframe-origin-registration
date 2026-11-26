@@ -50,7 +50,7 @@ export function ConfirmationPass({
   return (
     <section
       aria-labelledby="pass-confirmed-heading"
-      className="animate-enter-up flex h-full flex-col justify-between border border-[#27272f] bg-[#111115] shadow-2xl"
+      className="animate-enter-up flex h-full flex-col justify-between border border-white/15 bg-[#0e0e13]/85 shadow-[0_28px_75px_rgba(0,0,0,0.88),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md"
     >
       {/* Top confirmation banner */}
       <div className="no-print flex shrink-0 flex-wrap items-center justify-between gap-3 border-b border-[#27272f] bg-[#0c2415] px-5 py-3.5 sm:px-6">

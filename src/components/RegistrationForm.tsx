@@ -136,10 +136,10 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
   return (
     <section
       aria-labelledby="form-heading"
-      className="no-print flex h-full flex-col border border-[#27272f] bg-[#111115] shadow-2xl"
+      className="no-print flex h-full flex-col border border-white/15 bg-[#0e0e13]/82 shadow-[0_28px_75px_rgba(0,0,0,0.88),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md"
     >
       {/* Form Header */}
-      <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-[#27272f] bg-[#141419] px-5 py-3.5 sm:px-6">
+      <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-white/10 bg-[#14141b]/80 px-5 py-3.5 sm:px-6">
         <div>
           <p className="font-mono-tabular text-[10px] font-semibold tracking-[0.22em] text-[#a1a1aa] uppercase">
             STEP 01 / ATHLETE ENTRY
@@ -553,11 +553,11 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
         </div>
 
         {/* SUBMIT CTA */}
-        <div className="border-t border-[#27272f] pt-3.5">
+        <div className="border-t border-white/10 pt-3.5">
           <button
             type="submit"
             disabled={isSubmitting}
-            className="flex min-h-[48px] w-full cursor-pointer items-center justify-center gap-3 bg-[#facc15] px-6 py-3 text-xs font-bold tracking-[0.16em] text-[#08080a] uppercase transition-colors duration-150 hover:bg-[#fde047] active:bg-[#eab308] disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#fafafa] sm:text-sm"
+            className="flex min-h-[48px] w-full cursor-pointer items-center justify-center gap-3 bg-[#facc15] px-6 py-3 text-xs font-bold tracking-[0.16em] text-[#08080a] uppercase shadow-[0_5px_0_#a16207,0_14px_28px_rgba(250,204,21,0.22)] transition-all duration-150 hover:-translate-y-0.5 hover:bg-[#fde047] hover:shadow-[0_7px_0_#a16207,0_18px_32px_rgba(250,204,21,0.3)] active:translate-y-1 active:shadow-[0_1px_0_#a16207] disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#fafafa] sm:text-sm"
           >
             {isSubmitting ? (
               <>

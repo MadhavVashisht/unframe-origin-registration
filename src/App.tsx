@@ -1,15 +1,42 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { AmbientBattleBackdrop } from './components/AmbientBattleBackdrop';
+import { BattleMarquee } from './components/BattleMarquee';
+import { ConfirmationPass } from './components/ConfirmationPass';
 import { EventPoster } from './components/EventPoster';
 import { RegistrationForm } from './components/RegistrationForm';
-import { ConfirmationPass } from './components/ConfirmationPass';
-import { BattleMarquee } from './components/BattleMarquee';
 import type { SubmissionResult } from './types/registration';
 
 export function App() {
   const [submissionResult, setSubmissionResult] = useState<SubmissionResult | null>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number | null>(null);
+
+  function handlePointerMove(e: React.PointerEvent<HTMLDivElement>) {
+    if (e.pointerType !== 'mouse' || !rootRef.current) {
+      return;
+    }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+    const nx = e.clientX / window.innerWidth - 0.5;
+    const ny = e.clientY / window.innerHeight - 0.5;
+
+    if (rafRef.current !== null) {
+      cancelAnimationFrame(rafRef.current);
+    }
+    rafRef.current = requestAnimationFrame(() => {
+      rootRef.current?.style.setProperty('--mx', nx.toFixed(3));
+      rootRef.current?.style.setProperty('--my', ny.toFixed(3));
+    });
+  }
 
   return (
-    <div className="flex min-h-dvh flex-col lg:h-dvh lg:overflow-hidden">
+    <div
+      ref={rootRef}
+      onPointerMove={handlePointerMove}
+      className="relative flex min-h-dvh flex-col lg:h-dvh lg:overflow-hidden"
+    >
+      <AmbientBattleBackdrop />
       <BattleMarquee />
 
       {/* Single-screen non-scrollable desktop workspace */}

@@ -31,12 +31,7 @@
   body {
     min-height: 100dvh;
     overflow-x: hidden;
-    background-image:
-      radial-gradient(circle at 12% 8%, rgba(250, 204, 21, 0.08) 0%, transparent 42%),
-      radial-gradient(circle at 88% 18%, rgba(255, 85, 0, 0.09) 0%, transparent 38%),
-      linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-    background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+    background-color: #060608;
   }
 }
 
@@ -50,6 +45,16 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* 3D Extruded Headline Depth */
+.text-3d-origin {
+  text-shadow:
+    1px 1px 0 rgba(255, 85, 0, 0.55),
+    2px 2px 0 rgba(255, 85, 0, 0.45),
+    3px 3px 0 rgba(250, 204, 21, 0.35),
+    4px 4px 0 rgba(10, 10, 14, 0.95),
+    0 16px 36px rgba(0, 0, 0, 0.85);
+}
+
 /* Poster grain overlay using subtle radial stipple */
 .poster-grain {
   background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 0);
@@ -60,11 +65,125 @@
 .hazard-stripe {
   background-image: repeating-linear-gradient(
     -45deg,
-    rgba(250, 204, 21, 0.16),
-    rgba(250, 204, 21, 0.16) 8px,
+    rgba(250, 204, 21, 0.2),
+    rgba(250, 204, 21, 0.2) 8px,
     transparent 8px,
     transparent 16px
   );
+}
+
+/* 3D Perspective Stage Floor Grid */
+.stage-floor-3d {
+  background-image:
+    linear-gradient(to right, rgba(250, 204, 21, 0.16) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 85, 0, 0.18) 1px, transparent 1px);
+  background-size: 56px 56px;
+  transform: perspective(760px) rotateX(68deg) translateY(12%);
+  transform-origin: center bottom;
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.85) 10%, transparent 92%);
+}
+
+/* 3D Wireframe Cube */
+.cube-3d-scene {
+  perspective: 900px;
+}
+
+.cube-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  animation: spin-cube-3d 18s linear infinite;
+}
+
+.cube-3d-reverse {
+  position: relative;
+  transform-style: preserve-3d;
+  animation: spin-cube-3d-reverse 22s linear infinite;
+}
+
+.cube-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: visible;
+}
+
+/* 3D Orbital Gyroscope Rings */
+.orbit-3d-stage {
+  perspective: 800px;
+  transform-style: preserve-3d;
+}
+
+.orbit-ring-a {
+  transform-style: preserve-3d;
+  animation: orbit-spin-a 12s linear infinite;
+}
+
+.orbit-ring-b {
+  transform-style: preserve-3d;
+  animation: orbit-spin-b 9s linear infinite;
+}
+
+.orbit-ring-c {
+  transform-style: preserve-3d;
+  animation: orbit-spin-c 15s linear infinite;
+}
+
+@keyframes spin-cube-3d {
+  0% {
+    transform: rotateX(18deg) rotateY(0deg) rotateZ(8deg);
+  }
+  100% {
+    transform: rotateX(378deg) rotateY(360deg) rotateZ(8deg);
+  }
+}
+
+@keyframes spin-cube-3d-reverse {
+  0% {
+    transform: rotateX(-24deg) rotateY(360deg) rotateZ(-14deg);
+  }
+  100% {
+    transform: rotateX(336deg) rotateY(0deg) rotateZ(-14deg);
+  }
+}
+
+@keyframes orbit-spin-a {
+  0% {
+    transform: rotateX(64deg) rotateY(14deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(64deg) rotateY(14deg) rotateZ(360deg);
+  }
+}
+
+@keyframes orbit-spin-b {
+  0% {
+    transform: rotateX(48deg) rotateY(-42deg) rotateZ(360deg);
+  }
+  100% {
+    transform: rotateX(48deg) rotateY(-42deg) rotateZ(0deg);
+  }
+}
+
+@keyframes orbit-spin-c {
+  0% {
+    transform: rotateX(76deg) rotateY(32deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(76deg) rotateY(32deg) rotateZ(360deg);
+  }
+}
+
+@keyframes float-3d {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -12px, 16px);
+  }
+}
+
+.animate-float-3d {
+  animation: float-3d 6s ease-in-out infinite;
 }
 
 @keyframes enter-up {
@@ -132,7 +251,13 @@
   .animate-beat-1,
   .animate-beat-2,
   .animate-beat-3,
-  .animate-beat-4 {
+  .animate-beat-4,
+  .animate-float-3d,
+  .cube-3d,
+  .cube-3d-reverse,
+  .orbit-ring-a,
+  .orbit-ring-b,
+  .orbit-ring-c {
     animation: none;
   }
 

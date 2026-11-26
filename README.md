@@ -39,10 +39,11 @@ Single-screen, production-ready athlete registration web application for **UNFRA
 ├── src/
 │   ├── assets/battle/               # Bundled street-dance battle photography
 │   ├── components/
+│   │   ├── AmbientBattleBackdrop.tsx # Crossfading battle BG, 3D floor grid & cubes
 │   │   ├── BattleMarquee.tsx        # Top presenter & event ticker bar
 │   │   ├── BeatBars.tsx             # Animated audio-meter bars
 │   │   ├── ConfirmationPass.tsx     # Printable digital battle pass
-│   │   ├── EventPoster.tsx          # Interactive 4-scene poster & prize card
+│   │   ├── EventPoster.tsx          # Interactive 3D tilt poster & prize card
 │   │   └── RegistrationForm.tsx     # Validated registration form
 │   ├── services/
 │   │   └── registrationService.ts   # Endpoint resolution & submission client
