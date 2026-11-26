@@ -44,7 +44,7 @@ export function EventPoster() {
           transform: 'rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))',
           transformStyle: 'preserve-3d',
         }}
-        className="relative flex h-full flex-col justify-between overflow-hidden border border-white/15 bg-[#0e0e13]/68 shadow-[0_28px_70px_rgba(0,0,0,0.85)] backdrop-blur-md transition-transform duration-200 ease-out"
+        className="relative flex h-full flex-col justify-between overflow-x-hidden overflow-y-auto border border-white/15 bg-[#0e0e13]/68 shadow-[0_28px_70px_rgba(0,0,0,0.85)] backdrop-blur-md transition-transform duration-200 ease-out"
       >
         {/* Top hazard accent strip */}
         <div

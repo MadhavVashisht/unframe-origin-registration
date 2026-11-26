@@ -1,8 +1,9 @@
 import { useRef, useState } from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, MessageSquare } from 'lucide-react';
 import { AmbientBattleBackdrop } from './components/AmbientBattleBackdrop';
 import { BattleMarquee } from './components/BattleMarquee';
 import { ConfirmationPass } from './components/ConfirmationPass';
+import { ContactModal } from './components/ContactModal';
 import { EventPoster } from './components/EventPoster';
 import { RegistrationForm } from './components/RegistrationForm';
 import { EVENT_METADATA } from './services/registrationService';
@@ -10,6 +11,7 @@ import type { SubmissionResult } from './types/registration';
 
 export function App() {
   const [submissionResult, setSubmissionResult] = useState<SubmissionResult | null>(null);
+  const [isContactOpen, setIsContactOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number | null>(null);
 
@@ -65,25 +67,39 @@ export function App() {
 
         {/* Slim Footer */}
         <footer className="no-print shrink-0 border-t border-white/10 bg-[#08080a]/80 backdrop-blur-md">
-          <div className="mx-auto flex max-w-[1320px] flex-wrap items-center justify-between gap-2 px-4 py-2 text-[11px] text-[#d4d4d8] sm:px-6 lg:px-8">
+          <div className="mx-auto flex max-w-[1320px] flex-wrap items-center justify-between gap-3 px-4 py-2 text-[11px] text-[#d4d4d8] sm:px-6 lg:px-8">
             <span className="font-mono-tabular text-[#a1a1aa] uppercase">
               {EVENT_METADATA.presenter} &bull; {EVENT_METADATA.event}
             </span>
-            <p className="font-mono-tabular">
-              Developed by{' '}
-              <a
-                href="https://www.amadhav.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex cursor-pointer items-center gap-0.5 font-semibold text-[#facc15] underline decoration-[#facc15]/60 underline-offset-2 transition-colors hover:text-[#fde047] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#facc15]"
+
+            <div className="flex flex-wrap items-center gap-4">
+              <button
+                type="button"
+                onClick={() => setIsContactOpen(true)}
+                className="font-mono-tabular inline-flex cursor-pointer items-center gap-1.5 border border-white/15 bg-[#14141b] px-2.5 py-1 text-[11px] font-semibold text-[#fafafa] uppercase transition-colors hover:border-[#facc15] hover:text-[#facc15] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#facc15]"
               >
-                <span>Madhav Vashisht</span>
-                <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
-              </a>
-            </p>
+                <MessageSquare className="h-3 w-3 text-[#facc15]" aria-hidden="true" />
+                <span>Contact Us</span>
+              </button>
+
+              <p className="font-mono-tabular">
+                Developed by{' '}
+                <a
+                  href="https://www.amadhav.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex cursor-pointer items-center gap-0.5 font-semibold text-[#facc15] underline decoration-[#facc15]/60 underline-offset-2 transition-colors hover:text-[#fde047] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#facc15]"
+                >
+                  <span>Madhav Vashisht</span>
+                  <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
+                </a>
+              </p>
+            </div>
           </div>
         </footer>
       </div>
+
+      <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
     </div>
   );
 }

@@ -1,11 +1,18 @@
 /**
- * Same-origin serverless proxy for Vercel (eliminates Safari/browser cross-origin redirect issues
- * with Google Apps Script and keeps WEBHOOK_TOKEN server-side).
- *
- * Environment variables on Vercel:
- * - GOOGLE_SHEETS_WEBHOOK_URL = https://script.google.com/macros/s/.../exec
- * - WEBHOOK_TOKEN (optional, matching Apps Script Script Property WEBHOOK_TOKEN)
+ * Same-origin serverless proxy for Vercel and local Vite dev/preview
+ * (eliminates Safari/browser cross-origin CORS issues with Google Apps Script
+ * and keeps WEBHOOK_TOKEN server-side).
  */
+
+type EnvMap = Record<string, string | undefined>;
+
+function readRuntimeEnv(envOverride?: EnvMap): EnvMap {
+  if (envOverride) {
+    return envOverride;
+  }
+  const proc = (globalThis as { process?: { env?: EnvMap } }).process;
+  return proc?.env ?? {};
+}
 
 function jsonResponse(body: Record<string, unknown>, status = 200): Response {
   return new Response(JSON.stringify(body), {
@@ -17,11 +24,18 @@ function jsonResponse(body: Record<string, unknown>, status = 200): Response {
   });
 }
 
-export async function POST(request: Request): Promise<Response> {
-  const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL?.trim();
+export async function POST(request: Request, envOverride?: EnvMap): Promise<Response> {
+  const env = readRuntimeEnv(envOverride);
+  const webhookUrl =
+    env.GOOGLE_SHEETS_WEBHOOK_URL?.trim() || env.VITE_WEBHOOK_URL?.trim();
+
   if (!webhookUrl) {
     return jsonResponse(
-      { status: 'error', error: 'Server missing GOOGLE_SHEETS_WEBHOOK_URL.' },
+      {
+        status: 'error',
+        error:
+          'Missing GOOGLE_SHEETS_WEBHOOK_URL (or VITE_WEBHOOK_URL) environment variable.',
+      },
       500
     );
   }
@@ -57,7 +71,8 @@ export async function POST(request: Request): Promise<Response> {
     return jsonResponse({ status: 'error', error: 'Validation failed.' }, 400);
   }
 
-  const serverToken = process.env.WEBHOOK_TOKEN?.trim();
+  const serverToken =
+    env.WEBHOOK_TOKEN?.trim() || env.VITE_WEBHOOK_TOKEN?.trim();
   const forwardPayload = {
     ...body,
     name,
@@ -78,6 +93,23 @@ export async function POST(request: Request): Promise<Response> {
       body: JSON.stringify(forwardPayload),
     });
 
+    if (
+      upstream.status === 401 ||
+      upstream.status === 403 ||
+      upstream.url.includes('accounts.google.com')
+    ) {
+      return jsonResponse(
+        {
+          status: 'error',
+          error:
+            'Google Apps Script denied access (HTTP ' +
+            upstream.status +
+            '). In Apps Script, set Deploy -> Manage deployments -> Who has access to "Anyone".',
+        },
+        502
+      );
+    }
+
     const text = await upstream.text();
     let parsed: { status?: string; error?: string; registrationId?: string } | null = null;
     try {
@@ -92,7 +124,7 @@ export async function POST(request: Request): Promise<Response> {
           status: 'error',
           error:
             parsed?.error ||
-            `Google Sheets upstream did not confirm success (HTTP ${upstream.status}). Check Web App access is set to "Anyone".`,
+            `Google Sheets upstream did not confirm success (HTTP ${upstream.status}). Check Apps Script access is set to "Anyone".`,
         },
         502
       );
@@ -100,7 +132,7 @@ export async function POST(request: Request): Promise<Response> {
 
     return jsonResponse({
       status: 'success',
-      registrationId: parsed?.registrationId || body.registrationId,
+      registrationId: parsed.registrationId || body.registrationId,
     });
   } catch {
     return jsonResponse(
