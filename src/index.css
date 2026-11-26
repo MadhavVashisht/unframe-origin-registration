@@ -218,6 +218,32 @@
   animation-play-state: paused;
 }
 
+@keyframes wall-drift-left {
+  0% {
+    transform: translate3d(0%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes wall-drift-right {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0%, 0, 0);
+  }
+}
+
+.animate-wall-left {
+  animation: wall-drift-left 54s linear infinite;
+}
+
+.animate-wall-right {
+  animation: wall-drift-right 62s linear infinite;
+}
+
 @keyframes beat-bar {
   0%,
   100% {
@@ -248,6 +274,8 @@
 
   .animate-enter-up,
   .animate-marquee,
+  .animate-wall-left,
+  .animate-wall-right,
   .animate-beat-1,
   .animate-beat-2,
   .animate-beat-3,
