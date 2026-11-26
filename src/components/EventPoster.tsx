@@ -1,5 +1,7 @@
 import { useRef } from 'react';
 import { Award, Calendar, MapPin, ShieldCheck, Trophy } from 'lucide-react';
+import originLogo from '../assets/logos/origin-logo.png';
+import unframeLogo from '../assets/logos/unframe-logo.png';
 import { EVENT_METADATA } from '../services/registrationService';
 import { BeatBars } from './BeatBars';
 
@@ -67,32 +69,39 @@ export function EventPoster() {
 
           {/* Top Bar */}
           <div className="relative z-10 flex items-center justify-between gap-2">
-            <span className="font-mono-tabular border border-white/15 bg-[#08080a]/80 px-2.5 py-1 text-[10px] font-semibold tracking-[0.2em] text-[#facc15] uppercase">
-              {EVENT_METADATA.presenter}
-            </span>
-            <span className="font-mono-tabular inline-flex items-center gap-2 border border-white/15 bg-[#08080a]/80 px-2.5 py-1 text-[10px] font-semibold tracking-[0.18em] text-[#fafafa] uppercase">
+            <div className="flex items-center gap-2.5 border border-white/15 bg-[#08080a]/85 px-2.5 py-1.5">
+              <img
+                src={unframeLogo}
+                alt="UNFRAME EVENTS"
+                className="h-8 w-auto object-contain sm:h-9"
+              />
+              <span className="font-mono-tabular text-[10px] font-semibold tracking-[0.2em] text-[#a1a1aa] uppercase">
+                PRESENTS
+              </span>
+            </div>
+            <span className="font-mono-tabular inline-flex items-center gap-2 border border-white/15 bg-[#08080a]/80 px-2.5 py-1.5 text-[10px] font-semibold tracking-[0.18em] text-[#fafafa] uppercase">
               <BeatBars />
               <span>CYPHER OPEN</span>
             </span>
           </div>
 
-          {/* 3D Title Lockup */}
+          {/* 3D Title Lockup with Official ORIGIN Logo */}
           <div
-            className="relative z-10 my-auto py-4"
+            className="relative z-10 my-auto py-3"
             style={{ transform: 'translateZ(26px)' }}
           >
-            <p className="font-mono-tabular text-[11px] font-semibold tracking-[0.28em] text-[#d4d4d8] uppercase">
-              PRESENTS
-            </p>
-            <h1 className="font-display text-3d-origin mt-1 text-5xl leading-[0.86] tracking-tight text-[#fafafa] uppercase sm:text-7xl">
-              ORIGIN
-            </h1>
-            <div className="mt-3 inline-flex items-center bg-[#facc15] px-3 py-1 text-[#08080a] shadow-[0_4px_0_#a16207,0_10px_24px_rgba(250,204,21,0.22)]">
+            <h1 className="sr-only">ORIGIN (REP YOUR STYLE)</h1>
+            <img
+              src={originLogo}
+              alt="ORIGIN — represent your style"
+              className="h-24 w-auto max-w-full object-contain drop-shadow-[0_12px_28px_rgba(0,0,0,0.9)] sm:h-32"
+            />
+            <div className="mt-2.5 inline-flex items-center bg-[#facc15] px-3 py-1 text-[#08080a] shadow-[0_4px_0_#a16207,0_10px_24px_rgba(250,204,21,0.22)]">
               <span className="font-mono-tabular text-xs font-bold tracking-[0.2em] uppercase">
                 ( REP YOUR STYLE )
               </span>
             </div>
-            <p className="mt-3.5 max-w-sm text-xs leading-relaxed text-[#d4d4d8] sm:text-sm">
+            <p className="mt-3 max-w-sm text-xs leading-relaxed text-[#d4d4d8] sm:text-sm">
               One floor. Pure movement. Step into the ring and claim the crown in Delhi.
             </p>
           </div>

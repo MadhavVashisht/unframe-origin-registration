@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { ArrowUpRight, AtSign, MessageCircle, Phone, X } from 'lucide-react';
+import unframeLogo from '../assets/logos/unframe-logo.png';
 import { CONTACT_INFO, type ContactAction, type ContactChannel } from '../data/contactInfo';
 
 interface ContactModalProps {
@@ -103,16 +104,23 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
         <div className="p-5 sm:p-6">
           <div className="flex items-start justify-between gap-4 border-b border-white/10 pb-4">
-            <div>
-              <p className="font-mono-tabular text-[10px] font-semibold tracking-[0.2em] text-[#facc15] uppercase">
-                {CONTACT_INFO.subheading}
-              </p>
-              <h2
-                id="contact-modal-title"
-                className="font-display mt-1 text-2xl tracking-wide text-[#fafafa] uppercase sm:text-3xl"
-              >
-                {CONTACT_INFO.heading}
-              </h2>
+            <div className="flex items-center gap-3">
+              <img
+                src={unframeLogo}
+                alt="UNFRAME EVENTS"
+                className="h-10 w-auto shrink-0 object-contain"
+              />
+              <div>
+                <p className="font-mono-tabular text-[10px] font-semibold tracking-[0.2em] text-[#facc15] uppercase">
+                  {CONTACT_INFO.subheading}
+                </p>
+                <h2
+                  id="contact-modal-title"
+                  className="font-display mt-0.5 text-2xl tracking-wide text-[#fafafa] uppercase sm:text-3xl"
+                >
+                  {CONTACT_INFO.heading}
+                </h2>
+              </div>
             </div>
 
             <button

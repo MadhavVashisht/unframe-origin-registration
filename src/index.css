@@ -337,4 +337,8 @@
     color: #09090b !important;
     border-color: #27272a !important;
   }
+
+  .print-invert-logo {
+    filter: invert(1);
+  }
 }

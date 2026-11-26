@@ -6,6 +6,7 @@ import {
   Printer,
   RotateCcw,
 } from 'lucide-react';
+import unframeLogo from '../assets/logos/unframe-logo.png';
 import type { SubmissionResult } from '../types/registration';
 import { EVENT_METADATA } from '../services/registrationService';
 
@@ -90,13 +91,20 @@ export function ConfirmationPass({
               </p>
             </div>
 
-            <div className="border border-[#3f3f4a] bg-[#16161c] px-3.5 py-2 text-left sm:text-right">
-              <span className="font-mono-tabular block text-[10px] tracking-[0.2em] text-[#a1a1aa] uppercase">
-                ENTRY CODE
-              </span>
-              <span className="font-mono-tabular mt-0.5 block text-base font-bold tracking-wider text-[#facc15]">
-                {registration.registrationId}
-              </span>
+            <div className="flex items-center gap-3">
+              <img
+                src={unframeLogo}
+                alt="UNFRAME EVENTS"
+                className="print-invert-logo h-9 w-auto object-contain"
+              />
+              <div className="border border-[#3f3f4a] bg-[#16161c] px-3.5 py-2 text-left sm:text-right">
+                <span className="font-mono-tabular block text-[10px] tracking-[0.2em] text-[#a1a1aa] uppercase">
+                  ENTRY CODE
+                </span>
+                <span className="font-mono-tabular mt-0.5 block text-base font-bold tracking-wider text-[#facc15]">
+                  {registration.registrationId}
+                </span>
+              </div>
             </div>
           </div>
 

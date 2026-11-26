@@ -1,3 +1,4 @@
+import unframeLogo from '../assets/logos/unframe-logo.png';
 import { EVENT_METADATA } from '../services/registrationService';
 import { BeatBars } from './BeatBars';
 
@@ -13,12 +14,14 @@ const TICKER_ITEMS = [
 
 export function BattleMarquee() {
   return (
-    <div className="no-print flex h-9 shrink-0 items-stretch border-b border-[#27272f] bg-[#0c0c10]">
-      <div className="flex shrink-0 items-center gap-2 border-r border-[#27272f] bg-[#0c0c10] px-2.5 sm:gap-2.5 sm:px-5">
+    <div className="no-print flex h-10 shrink-0 items-stretch border-b border-[#27272f] bg-[#0c0c10]">
+      <div className="flex shrink-0 items-center gap-2 border-r border-[#27272f] bg-[#0c0c10] px-2.5 sm:gap-3 sm:px-4">
         <BeatBars />
-        <span className="font-mono-tabular text-[10px] font-bold tracking-[0.14em] text-[#fafafa] uppercase sm:text-xs sm:tracking-[0.2em]">
-          {EVENT_METADATA.presenter}
-        </span>
+        <img
+          src={unframeLogo}
+          alt={EVENT_METADATA.presenter}
+          className="h-7 w-auto object-contain"
+        />
       </div>
 
       <div className="relative flex flex-1 items-center overflow-hidden bg-[#facc15] text-[#08080a]">

@@ -37,7 +37,9 @@ Single-screen, production-ready athlete registration web application for **UNFRA
 ├── google-apps-script/
 │   └── Code.gs                      # Google Sheets Web App handler (doGet + doPost)
 ├── src/
-│   ├── assets/battle/               # Bundled street-dance battle photography
+│   ├── assets/
+│   │   ├── battle/                  # Bundled street-dance battle photography
+│   │   └── logos/                   # UNFRAME EVENTS & ORIGIN brand logos
 │   ├── components/
 │   │   ├── AmbientBattleBackdrop.tsx # Crossfading battle BG, 3D floor grid & cubes
 │   │   ├── BattleMarquee.tsx        # Top presenter & event ticker bar
