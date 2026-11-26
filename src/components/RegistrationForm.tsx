@@ -23,10 +23,7 @@ import {
   validateAllFields,
   validateField,
 } from '../utils/validation';
-import {
-  isRegistrationBackendConfigured,
-  submitRegistration,
-} from '../services/registrationService';
+import { submitRegistration } from '../services/registrationService';
 
 const CITY_SUGGESTIONS = ['Delhi', 'New Delhi', 'Noida', 'Gurugram', 'Faridabad', 'Ghaziabad', 'Mumbai', 'Bengaluru'];
 
@@ -43,7 +40,6 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const errorSummaryRef = useRef<HTMLDivElement>(null);
-  const backendReady = useMemo(() => isRegistrationBackendConfigured(), []);
   const idFormat = useMemo(() => detectIdFormat(values.idLast6), [values.idLast6]);
 
   const errorList = useMemo(
@@ -154,18 +150,6 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
           >
             DANCER REGISTRATION
           </h2>
-        </div>
-
-        <div className="inline-flex items-center gap-2 border border-[#2e2e38] bg-[#18181d] px-3 py-1.5">
-          <span
-            className={`h-2 w-2 rounded-full ${
-              backendReady ? 'bg-[#4ade80]' : 'bg-[#facc15]'
-            }`}
-            aria-hidden="true"
-          />
-          <span className="font-mono-tabular text-[11px] font-semibold text-[#e4e4e7] uppercase">
-            {backendReady ? 'GOOGLE SHEETS LIVE' : 'SHEET URL PENDING'}
-          </span>
         </div>
       </div>
 
