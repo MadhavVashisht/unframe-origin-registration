@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { ArrowUpRight } from 'lucide-react';
 import { AmbientBattleBackdrop } from './components/AmbientBattleBackdrop';
 import { BattleMarquee } from './components/BattleMarquee';
 import { ConfirmationPass } from './components/ConfirmationPass';
@@ -69,17 +70,16 @@ export function App() {
               {EVENT_METADATA.presenter} &bull; {EVENT_METADATA.event}
             </span>
             <p className="font-mono-tabular">
-              Developed by <span className="font-semibold text-[#fafafa]">Madhav Vashisht</span>{' '}
-              (
+              Developed by{' '}
               <a
                 href="https://www.amadhav.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="cursor-pointer font-semibold text-[#facc15] underline decoration-[#facc15]/60 underline-offset-2 transition-colors hover:text-[#fde047] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#facc15]"
+                className="inline-flex cursor-pointer items-center gap-0.5 font-semibold text-[#facc15] underline decoration-[#facc15]/60 underline-offset-2 transition-colors hover:text-[#fde047] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#facc15]"
               >
-                www.amadhav.com
+                <span>Madhav Vashisht</span>
+                <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
               </a>
-              )
             </p>
           </div>
         </footer>
